@@ -18,10 +18,12 @@ class Star{
     
   public void draw(int dir){
     if (dir == 1){
+      noStroke();
       fill(242, 239, 24);
       triangle(x + 0, y - 475, z + 20, y + 85 - h, x + 40, y - 475);
     }
     else{
+      noStroke();
       fill(242, 239, 24);
       triangle(x + 0, y - 500, z + 20, y + 140 - h, x + 40, y - 500);
     }

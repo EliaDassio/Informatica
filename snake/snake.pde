@@ -1,4 +1,4 @@
-
+Game_over_and_score go;
 ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
 
 int wh = 30, hg = 30, bs = 20, dir = 1, fx = 4, fy = 15, sc = 0, h_sc = 0, conf = 0;
@@ -9,6 +9,8 @@ void setup(){
   size(600, 600);
   x.add(15);
   y.add(15);
+  
+  go = new Game_over_and_score(sc, h_sc);
   
   background(0);
   fill(133, 41, 166);
@@ -26,17 +28,7 @@ void draw(){
   for (int i = 0; i < x.size(); i++){
     rect(x.get(i) * bs, y.get(i) * bs, bs, bs);
   }
-  if (!game_over){
-    fill(96, 235, 225);
-    rect(fx*bs, fy*bs, bs, bs);
-    sc = x.size();
-    if (sc > h_sc){
-      h_sc = sc;
-    }
-    textAlign(CENTER);
-    textSize(20);
-    fill(0);
-    text("Score: "+ sc + "  High Score: "+ h_sc, 10, 10, width - 20, 50);
+  if (!go.controll(game_over)){
     if (frameCount%8 == 0){
        x.add(0, x.get(0) + x_dir[dir]); 
        y.add(0, y.get(0) + y_dir[dir]);
@@ -57,15 +49,6 @@ void draw(){
          y.remove(y.size()-1);
        }
     }
-  }
-  else{
-    background(0);
-    if (frameCount % (int)random(1, 1000) != 0 ){
-      fill(191, 19, 19);
-      textSize(35);
-      textAlign(CENTER);
-      text("GAME OVER\n YOUR SCORE: " + sc + "\n YOUR HIGH SCORE: " + h_sc + "\n PRESS ENTER TO PLAY AGAIN", width/2, height/3);
-    }
     if (keyCode == ENTER){
       x.clear();
       y.clear();
@@ -73,8 +56,7 @@ void draw(){
       y.add(15);
       sc = 0;
       game_over = false;
-    }
-    
+    } 
   }
 }
 
